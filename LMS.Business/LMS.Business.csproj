@@ -50,7 +50,7 @@
       <Project>{1D333D02-2A9D-4BCC-BCF5-6BBCC3E1C388}</Project>
       <Name>LMS.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Repositary\LMS.Repositary.csproj">
+    <ProjectReference Include="..\LMS.Repository\LMS.Repositary.csproj">
       <Project>{6e3bfe41-9dd9-454f-b8e4-9ea11427ea88}</Project>
       <Name>LMS.Repositary</Name>
     </ProjectReference>

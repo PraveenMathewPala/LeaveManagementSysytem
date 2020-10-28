@@ -1,14 +1,8 @@
-﻿using System;
+﻿using Business;
+using LMS.Model;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using LeaveManagementSysytem.Models;
-using LeaveManagementSysytem.ViewModels;
-using LeaveManagementSysytem.Identity;
-using Business;
-using LMS.Model;
-using Repositary;
 
 namespace LeaveManagementSysytem.Controllers
 {
@@ -45,10 +39,10 @@ namespace LeaveManagementSysytem.Controllers
         public ActionResult Edit(int Eid)
         {
            
-            EmployeeDbContext db = new EmployeeDbContext();
-            Employee test = db.Employee.Where(temp => temp.Employeeid == Eid).FirstOrDefault();
+           // EmployeeDbContext db = new EmployeeDbContext();
+            //Employee test = db.Employee.Where(temp => temp.Employeeid == Eid).FirstOrDefault();
 
-            return View(test);
+            return View();
         }
         [HttpPost]
         public ActionResult Edit(Employee obj)
