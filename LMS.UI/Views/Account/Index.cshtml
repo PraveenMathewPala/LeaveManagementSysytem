@@ -17,14 +17,16 @@
             <th>Emp ID</th>
             <th>Emp Name</th>
             <th>Salary</th>
+           
         </tr>
         @foreach (var emp in Model)
         {
-            <tr>
-                <td>@emp.Email</td>
-                <td>@emp.EmployeeName</td>
-                <td>@emp.Mobile</td>
-            </tr>
+    <tr>
+        <td>@emp.Email</td>
+        <td>@emp.EmployeeName</td>
+        <td>@emp.Mobile</td>
+       
+    </tr>
         }
     </table>
 </body>

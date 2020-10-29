@@ -38,5 +38,8 @@ namespace LMS.Model
         {
             get; set;
         }
+
+        public string ImageUrl { get; set; }
+
     }
 }

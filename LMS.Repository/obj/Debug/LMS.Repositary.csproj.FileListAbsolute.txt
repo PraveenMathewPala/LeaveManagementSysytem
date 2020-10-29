@@ -1,0 +1,16 @@
+C:\Users\User\source\repos\LMS1\LMS.Repository\bin\Debug\Repositary.dll.config
+C:\Users\User\source\repos\LMS1\LMS.Repository\bin\Debug\Repositary.dll
+C:\Users\User\source\repos\LMS1\LMS.Repository\bin\Debug\Repositary.pdb
+C:\Users\User\source\repos\LMS1\LMS.Repository\bin\Debug\EntityFramework.dll
+C:\Users\User\source\repos\LMS1\LMS.Repository\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\User\source\repos\LMS1\LMS.Repository\bin\Debug\LMS.Model.dll
+C:\Users\User\source\repos\LMS1\LMS.Repository\bin\Debug\LMS.Model.pdb
+C:\Users\User\source\repos\LMS1\LMS.Repository\bin\Debug\EntityFramework.xml
+C:\Users\User\source\repos\LMS1\LMS.Repository\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\User\source\repos\LMS1\LMS.Repository\obj\Debug\LMS.Repositary.csprojAssemblyReference.cache
+C:\Users\User\source\repos\LMS1\LMS.Repository\obj\Debug\LMS.Repositary.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\LMS1\LMS.Repository\obj\Debug\LMS.Repositary.csproj.CopyComplete
+C:\Users\User\source\repos\LMS1\LMS.Repository\obj\Debug\Repositary.dll
+C:\Users\User\source\repos\LMS1\LMS.Repository\obj\Debug\Repositary.pdb
+C:\Users\User\source\repos\LMS1\LMS.Repository\obj\Debug\Repositary.Migrations.Initial.resources
+C:\Users\User\source\repos\LMS1\LMS.Repository\obj\Debug\LMS.Repositary.csproj.GenerateResource.cache
