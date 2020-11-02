@@ -1,12 +1,13 @@
 ﻿using LMS.Model;
 using Repositary;
+using System;
 using System.Collections.Generic;
 
 namespace Business
 {
     public class EmployeeBusiness
     {
-       public Employee EditEmployee(Employee obj)
+       public bool EditEmployee(Employee obj)
         {
             EmployeeRepository ob = new EmployeeRepository();
            return ob.save(obj);
@@ -23,11 +24,20 @@ namespace Business
             
         }
 
-        public Employee RegisterEmployees(Employee obj)
+        public bool RegisterEmployees(Employee obj)
         {
             EmployeeRepository ob = new EmployeeRepository();
             return ob.Register(obj);
            
         }
+
+        public Employee ViewEmployees(Employee rvm)
+        {
+            EmployeeRepository ob = new EmployeeRepository();
+            return ob.ViewEmp(rvm);
+        }
+
+       
+
     }
 }

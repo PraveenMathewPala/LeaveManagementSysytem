@@ -1,4 +1,5 @@
 ﻿using LMS.Model;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,12 +9,14 @@ using System.Threading.Tasks;
 
 namespace Repositary
 {
-    public class EmployeeDbContext : DbContext
+    public class EmployeeDbContext :IdentityDbContext<Employee>
     {
-        public DbSet<Employee> Employee { get; set; }
+        
         public EmployeeDbContext() : base("EmployeeDbContext")
         {
 
         }
+
+      
     }
 }

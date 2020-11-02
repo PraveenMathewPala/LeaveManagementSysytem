@@ -1,4 +1,4 @@
-﻿@Model List<LMS.Model.Employee>
+﻿@model List<LMS.Model.Employee>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,25 +7,33 @@
 
 
 <html>
-<head>
-    <title>Entity Framework</title>
-</head>
+
 <body>
-    <h1>Entity Framework</h1>
+    <h1>Employees</h1>
     <table border="1">
         <tr>
-            <th>Emp ID</th>
-            <th>Emp Name</th>
-            <th>Salary</th>
+            <th>Profile picture</th>
+            <th>Employee Name</th>
+            <th>Mobile</th>
+            
+            <th>Department Name</th>
+            <th>Employee Designation</th>
+            <th>Special Permission</th>
            
+            <th>Edit</th>
+
         </tr>
         @foreach (var emp in Model)
         {
     <tr>
-        <td>@emp.Email</td>
+        <td><img src="data:image;base64,@emp.ImageUrl" width="50" /></td>
         <td>@emp.EmployeeName</td>
         <td>@emp.Mobile</td>
-       
+        <td>@emp.DepartmentName</td>
+        <td>@emp.EmployeeDesignation</td>
+        <td>@emp.SpecialPermission</td>
+
+        <td> <a href="/Account/Edit?Id=@emp.Id" class="btn btn-outline-info text-decoration-none"><i class="fa fa-pencil" aria-hidden="true"></i>Edit Profile</a></td>
     </tr>
         }
     </table>

@@ -1,53 +1,71 @@
 ﻿
 using LMS.Model;
+using Microsoft.AspNet.Identity;
 using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Repositary
 {
    public class EmployeeRepository
     {
-        public Employee save(Employee obj)
+        EmployeeDbContext appDbContext ;
+        ApplicationUserStore appUserStore;
+        ApplicationUserManager userManager ;
+
+        public EmployeeRepository()
         {
-            EmployeeDbContext db = new EmployeeDbContext();
-            Employee test = db.Employee.Where(temp => temp.Employeeid == obj.Employeeid).FirstOrDefault();
-            test.Departmentid = obj.Departmentid;
+            appDbContext = new EmployeeDbContext();
+           appUserStore = new ApplicationUserStore(appDbContext);
+            userManager = new ApplicationUserManager(appUserStore);
+
+
+        }
+
+        public bool save(Employee obj)
+        {
+
+            var test = userManager.FindById(obj.Id);
+                //Users.Where(temp => temp.Eid == obj.Eid).FirstOrDefault();
+
+            test.DepartmentName = obj.DepartmentName;
             test.Mobile = obj.Mobile;
             test.SpecialPermission = obj.SpecialPermission;
             test.EmployeeDesignation = obj.EmployeeDesignation;
-            db.SaveChanges();
-            return obj;
+            test.ImageUrl = obj.ImageUrl;
+            var result = userManager.Update(test);
+            return result.Succeeded;
 
 
         }
+
+       
 
         public List<Employee> GetEmployees()
         {
-            EmployeeDbContext db = new EmployeeDbContext();
-            List<Employee> emps = db.Employee.ToList();
+            List<Employee> emps = userManager.Users.Select(temp => temp).ToList();
             return emps;
         }
 
-        public Employee Register(Employee obj)
+        public Employee ViewEmp(Employee rvm)
         {
-            using (EmployeeDbContext db = new EmployeeDbContext())
-            {
-                Employee test = new Employee();
-                test.EmployeeName = obj.EmployeeName;
-                test.Email = obj.Email;
-                test.Password = obj.Password;
-                test.EmployeeDesignation =obj.EmployeeDesignation;
-                test.Mobile =obj.Mobile;
-                test.SpecialPermission =obj.SpecialPermission;
-                test.Employeeid = obj.Employeeid;
-                test.Departmentid =obj.Departmentid;
 
-                db.Employee.Add(test); db.SaveChanges();
-                return test;
-            }
+            Employee test = userManager.FindById(rvm.Id);
+            return test;
         }
+
+       public bool Register(Employee obj)
+        {
+            obj.UserName = obj.Email;
+            var result = userManager.Create(obj);
+            return result.Succeeded ; 
+            
+        }
+
+       
     }
 }

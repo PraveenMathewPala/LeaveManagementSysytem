@@ -1,4 +1,4 @@
-﻿@Model LMS.Model.Employee
+﻿@model LMS.Model.Employee
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,44 +6,60 @@
 
 <h2>Edit</h2>
 
-<form action="/Account/Edit/@Model.Employeeid" method="post">
+<form action="/Account/Edit" method="post" enctype="multipart/form-data">
+    <div class="form-row">
+        <input type="hidden" name="Id" value="@Model.Id" />
+
+
+        <input type="hidden" name="EmployeeName" value="@Model.EmployeeName" />
+
+        <input type="hidden" name="Email" value="@Model.Email" />
+
+        <input type="hidden" name="Password" value="@Model.Password" />
+
+        <div class="form-group col-md-6">
+            <label for="Mobile">Mobile</label>
+            <input type="number" class="form-control" id="Mobile" name="Mobile" placeholder="Mobile" value="@Model.Mobile" >
+        </div>
+        <div class="form-group col-md-6">
+                <label for=Special Permission">Special Permission</label>
+                <select id="SpecialPermission" name="SpecialPermission">
+                    <option value="true">true</option>
+                    <option value="false">false</option>
+                </select>
+                @*<label for=Special Permission">Special Permission</label>
+            <input type="number" class="form-control" id="SpecialPermission" name="Special Permission" placeholder="1 or 0" value="@Model.SpecialPermission" [1,0] >*@
+            </div>
+        <div class="form-group col-md-6">
+            <label for="DepartmentName">DepartmentName</label>
+            <select id="DepartmentName" name="DepartmentName">
+                <option value="@Model.DepartmentName">@Model.DepartmentName</option>
+                <option value="Developer">Developer</option>
+                <option value="HR">HR</option>
+                <option value="Marketing">Marketing</option>
+                <option value="QA">QA</option>
+                <option value="Testing">Testing</option>
+                <option value="Administration">Administration</option>
+
+            </select>
+            @*<label for="Departmentid">Departmentid</label>
+        <input type="number" class="form-control" id="Departmentid" name="Departmentid" placeholder="Departmentid" value="@Model.Departmentid">*@
+        </div>
+        </div>
 <div class="form-row">
+    
+   
     <div class="form-group col-md-6">
-        <label for="EmployeeName">Employee id</label>
-        <input type="hidden" name="EmployeeID" value="@Model.Employeeid" />
-        <input type="number" class="form-control" id="Employeeid" name="Employeeid" placeholder="Employeeid" value="@Model.Employeeid">
-    </div>
-    <div class="form-group col-md-6">
-        <label for="EmployeeName">Employee Name</label>
-        <input type="hidden" name="EmployeeID" value="@Model.EmployeeName" />
-        <input type="text" class="form-control" id="EmployeeName" name="EmployeeName" placeholder="Employee Name" value="@Model.EmployeeName">
-    </div> <div class="form-group col-md-6">
-        <label for="EmployeeName">Email</label>
-        <input type="hidden" name="EmployeeID" value="@Model.Email" />
-        <input type="Email" class="form-control" id="Email" name="Email" placeholder="Email" value="@Model.Email">
-    </div>
-    <div class="form-group col-md-6">
-        <label for="EmployeeName">Password</label>
-        <input type="hidden" name="EmployeeID" value="@Model.Password" />
-        <input type="Password" class="form-control" id="Password" name="Password" placeholder="Password" value="@Model.Password">
-    </div>
-    <div class="form-group col-md-6">
-        <label for="Mobile">Mobile</label>
-        <input type="number" class="form-control" id="Mobile" name="Mobile" placeholder="Mobile" value="@Model.Mobile">
-    </div>
-</div>
-<div class="form-row">
-    <div class="form-group col-md-6">
-        <label for="DateOfPurchase">Special Permission</label>
-        <input type="number" class="form-control" id="SpecialPermission" name="DateOfPurchase" placeholder="1 or 0" value="@Model.SpecialPermission">
-    </div>
-    <div class="form-group col-md-6">
-        <label for="EmployeeName">Departmentid</label>
-        <input type="number" class="form-control" id="Departmentid" name="Departmentid" placeholder="Departmentid" value="@Model.Departmentid">
-    </div>
-    <div class="form-group col-md-6">
-        <label for="EmployeeName">EmployeeDesignation</label>
+        <label for="EmployeeDesignation">EmployeeDesignation</label>
         <input type="text" class="form-control" id="EmployeeDesignation" name="EmployeeDesignation" placeholder="EmployeeDesignation" value="@Model.EmployeeDesignation">
+    </div>
+    <div class="form-group col-md-6">
+        <label for="Image">Image</label>
+        
+        @{
+        Html.RenderPartial("Image");  
+        }
+
     </div>
 
 </div>
