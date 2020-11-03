@@ -1,0 +1,56 @@
+﻿@model LMS.Model.Leave
+@{
+    ViewBag.Title = "LeaveAction";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>LeaveAction</h2>
+
+<form action="/Account/LeaveAction" method="post">
+    @Html.AntiForgeryToken()
+    <div class="form-row">
+        <input type="hidden" name="Eid" value="@Model.Eid" />
+        <input type="hidden" name="Lid" value="@Model.Lid" />
+
+        <input type="hidden" name="DepartmentName" value="@Model.DepartmentName" />
+        <input type="hidden" name="Projectid" value="@Model.Projectid" />
+        <input type="hidden" name="EmployeeName" value="@Model.EmployeeName" />
+        <input type="hidden" name="StartDate" value="@Model.StartDate" />
+        <input type="hidden" name="Number" value="@Model.Number" />
+
+        <input type="hidden" name="EndDate" value="@Model.EndDate" />
+
+
+        <div class="form-group col-md-6">
+            <label for="Status">Status</label>
+            <select id="Status" name="Status">
+                <option value="true">true</option>
+                <option value="false">false</option>
+            </select>
+
+        </div>
+    </div>
+
+    <a class="btn btn-danger" onclick="SendEmail()">Click to Send Email</a>
+
+    @*<p> hai Praveen <br/>This email is for testing purpose <br/>regards </p>*@
+    <script>
+        var SendEmail = function () {
+            $.ajax({
+                type: "Post",
+                url: "/Account/SendMailToUser",
+                success: function (data) {
+                    alert("Success");
+                }
+            })
+        }
+
+    </script>
+
+    @Html.ValidationSummary()
+    <div class="form-group col-md-12">
+
+        <button type="submit" class="btn btn-success">Register</button>
+        <a class="btn btn-danger" href="/Home/Index">Cancel</a>
+    </div>
+</form>

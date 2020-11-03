@@ -19,17 +19,22 @@
 
         <div class="form-group col-md-6">
             <label for="Mobile">Mobile</label>
-            <input type="number" class="form-control" id="Mobile" name="Mobile" placeholder="Mobile" value="@Model.Mobile" >
+            <input type="number" class="form-control" id="Mobile" name="Mobile" placeholder="Mobile" value="@Model.Mobile">
         </div>
         <div class="form-group col-md-6">
-                <label for=Special Permission">Special Permission</label>
-                <select id="SpecialPermission" name="SpecialPermission">
-                    <option value="true">true</option>
-                    <option value="false">false</option>
-                </select>
-                @*<label for=Special Permission">Special Permission</label>
+            <label for="Projectid">Projectid</label>
+            <input type="number" class="form-control" id="Projectid" name="Projectid" placeholder="Projectid" value="@Model.Projectid">
+            @Html.ValidationMessageFor(temp => temp.Projectid)
+        </div>
+        <div class="form-group col-md-6">
+            <label for=Special Permission">Special Permission</label>
+            <select id="SpecialPermission" name="SpecialPermission">
+                <option value="true">true</option>
+                <option value="false">false</option>
+            </select>
+            @*<label for=Special Permission">Special Permission</label>
             <input type="number" class="form-control" id="SpecialPermission" name="Special Permission" placeholder="1 or 0" value="@Model.SpecialPermission" [1,0] >*@
-            </div>
+        </div>
         <div class="form-group col-md-6">
             <label for="DepartmentName">DepartmentName</label>
             <select id="DepartmentName" name="DepartmentName">
@@ -43,9 +48,9 @@
 
             </select>
             @*<label for="Departmentid">Departmentid</label>
-        <input type="number" class="form-control" id="Departmentid" name="Departmentid" placeholder="Departmentid" value="@Model.Departmentid">*@
+            <input type="number" class="form-control" id="Departmentid" name="Departmentid" placeholder="Departmentid" value="@Model.Departmentid">*@
         </div>
-        </div>
+    </div>
 <div class="form-row">
     
    
@@ -65,7 +70,7 @@
 </div>
 
 <button type="submit" class="btn btn-success">Save</button>
-<a class="btn btn-danger" href="/Employees/index">Cancel</a>
+<a class="btn btn-danger" href="/Home/index">Cancel</a>
 </form>
 
 

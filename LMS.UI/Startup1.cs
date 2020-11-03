@@ -44,6 +44,7 @@ namespace LeaveManagementSysytem
                 user.UserName = "admin";
                 user.Email = "admin@gmail.com";
                 string Password = "admin123";
+                user.Password="admin123";
                 var chkUser = userManager.Create(user, Password);
                 if (chkUser.Succeeded)
                 {

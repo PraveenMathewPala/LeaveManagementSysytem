@@ -51,6 +51,16 @@ namespace Repositary
             return emps;
         }
 
+        public Employee FindByName(string empName)
+        {
+            return userManager.Users.Where(temp => temp.EmployeeName == empName).FirstOrDefault();
+        }
+
+        public Employee GetById(string id)
+        {
+            return userManager.Users.Where(temp => temp.Id == id).FirstOrDefault();
+        }
+
         public Employee ViewEmp(Employee rvm)
         {
 
@@ -62,7 +72,19 @@ namespace Repositary
         {
             obj.UserName = obj.Email;
             var result = userManager.Create(obj);
+            if(result.Succeeded)
+            {
+
+                if (obj.DepartmentName == "HR")
+                    userManager.AddToRole(obj.Id, "Admin");
+                else if (obj.DepartmentName == "HR" && (obj.SpecialPermission == true || obj.DepartmentName == "ProjectManager"))
+                    userManager.AddToRole(obj.Id, "AdminSpecial");
+               else if (obj.EmployeeDesignation == "ProjectManager")
+                    userManager.AddToRole(obj.Id, "Manager");
+
+            }
             return result.Succeeded ; 
+
             
         }
 

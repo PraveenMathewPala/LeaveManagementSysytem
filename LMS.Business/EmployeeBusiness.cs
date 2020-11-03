@@ -7,37 +7,70 @@ namespace Business
 {
     public class EmployeeBusiness
     {
-       public bool EditEmployee(Employee obj)
+        EmployeeRepository ob;
+        LeaveRepository obj;
+        public EmployeeBusiness()
         {
-            EmployeeRepository ob = new EmployeeRepository();
+           ob = new EmployeeRepository();
+           obj = new LeaveRepository();
+
+        }
+        public bool EditEmployee(Employee obj)
+        {
            return ob.save(obj);
             
         }
 
         public List<Employee> GetAllEmployees()
         {
-            EmployeeRepository Db = new EmployeeRepository();
 //Test Commit
            
 
-            return Db.GetEmployees();
+            return ob.GetEmployees();
             
         }
 
         public bool RegisterEmployees(Employee obj)
         {
-            EmployeeRepository ob = new EmployeeRepository();
             return ob.Register(obj);
            
         }
 
         public Employee ViewEmployees(Employee rvm)
         {
-            EmployeeRepository ob = new EmployeeRepository();
             return ob.ViewEmp(rvm);
         }
 
-       
+        public void CreateLeave(Leave lv)
+        {
+            obj.Register(lv);
 
+        }
+
+        public List<Leave> GetAllLeaves()
+        {
+            return obj.GetLeaves();
+        }
+
+        public Leave GetLeaveById(int id)
+        {
+            return obj.GetLeave(id);
+
+        }
+
+        public void UpdateLeave(Leave lv)
+        {
+            obj.Update(lv);
+        }
+
+        public Employee FindEmployee(string empName)
+        {
+            return ob.FindByName(empName);
+        }
+
+        public Employee GetEmployeeById(string id)
+        {
+            return ob.GetById(id);
+        }
     }
 }

@@ -157,6 +157,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filter\ExceptEmployeeAuthorization.cs" />
+    <Compile Include="Filter\HrAndSpecial.cs" />
+    <Compile Include="Filter\HRAuthorization.cs" />
+    <Compile Include="Filter\ManagerAndHRAuthorization.cs" />
+    <Compile Include="Filter\ManagerAndSpecialAuthorization.cs" />
+    <Compile Include="Filter\ManagerAuthorization.cs" />
     <Compile Include="Filter\MyAuthenticationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -207,6 +213,10 @@
     <Content Include="Views\Shared\Image.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\MyProfile.cshtml" />
+    <Content Include="Views\Account\LeaveApply.cshtml" />
+    <Content Include="Views\Account\LeaveView.cshtml" />
+    <Content Include="Views\Account\LeaveAction.cshtml" />
+    <Content Include="Views\Account\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

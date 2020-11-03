@@ -37,5 +37,7 @@ namespace LMS.Model
 
         public string ImageUrl { get; set; }
 
+        public int Projectid { get; set; }
+
     }
 }

@@ -1,0 +1,40 @@
+﻿@model LMS.Model.Leave
+
+@{
+    ViewBag.Title = "LeaveApply";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>LeaveApply</h2>
+
+<form action="/Account/LeaveApply" method="post">
+    @Html.AntiForgeryToken()
+    <div class="form-row">
+        <input type="hidden" name="Eid" value="@Model.Eid" />
+        <input type="hidden" name="Lid" value="@Model.Lid" />
+
+        <input type="hidden" name="DepartmentName" value="@Model.DepartmentName" />
+        <input type="hidden" name="Status" value="@Model.Status" />
+        <input type="hidden" name="Projectid" value="@Model.Projectid" />
+        <input type="hidden" name="EmployeeName" value="@Model.EmployeeName" />
+
+        <div class="form-group col-md-6">
+            <label for="StartDate">StartDate</label>
+            <input type="date" class="form-control" id="StartDate" name="StartDate" placeholder="StartDate" required>
+            @Html.ValidationMessageFor(temp => temp.StartDate)
+        </div>
+        <div class="form-group col-md-6">
+            <label for="EndDate">EndDate</label>
+            <input type="date" class="form-control" id="EndDate" name="EndDate" placeholder="EndDate" required>
+
+            @Html.ValidationMessageFor(temp => temp.EndDate)
+        </div>
+    </div>
+
+        @Html.ValidationSummary()
+            <div class="form-group col-md-12">
+
+                <button type="submit" class="btn btn-success">Register</button>
+                <a class="btn btn-danger" href="/Home/Index">Cancel</a>
+            </div>
+</form>

@@ -18,6 +18,7 @@ namespace LeaveManagementSysytem.ViewModels
     public int Departmentid{ get; set; }
     public int Employeeid{ get; set; }
     public string EmployeeDesignation { get; set; }
+        public int Projectid { get; set; }
     public bool SpecialPermission{  get; set; }
     }
 }

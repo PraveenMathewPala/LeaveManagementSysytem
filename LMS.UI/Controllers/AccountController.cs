@@ -8,23 +8,31 @@ using Repositary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+
 
 namespace LeaveManagementSysytem.Controllers
 {
     public class AccountController : Controller
     {
+        EmployeeBusiness obj;
+        public AccountController()
+        {
+            obj = new EmployeeBusiness();
+
+        }
         // GET: Account
-        [MyAuthenticationFilter]
+        [HRAuthorization]
         public ActionResult Index()
         {
-            EmployeeBusiness obj = new EmployeeBusiness();
-            List<Employee> EmployeeList=obj.GetAllEmployees();
+            List<Employee> EmployeeList = obj.GetAllEmployees();
             return View(EmployeeList);
         }
-
         public ActionResult Register()
         {
             return View();
@@ -35,9 +43,8 @@ namespace LeaveManagementSysytem.Controllers
             if (ModelState.IsValid)
             {
                 //rvm.PasswordHash = Crypto.HashPassword(rvm.Password);
-                EmployeeBusiness obj = new EmployeeBusiness();
                 bool result = obj.RegisterEmployees(rvm);
-               
+
                 return RedirectToAction("Index", "Home");
             }
 
@@ -49,31 +56,29 @@ namespace LeaveManagementSysytem.Controllers
         {
             Employee rvm = new Employee();
             rvm.Id = Id;
-            EmployeeBusiness obj = new EmployeeBusiness();
             Employee Emp = obj.ViewEmployees(rvm);
 
 
             return View(Emp);
         }
         [HttpPost]
-        public ActionResult Edit(Employee obj)
+        public ActionResult Edit(Employee ob)
         {
 
-            EmployeeBusiness ob = new EmployeeBusiness();
 
-            if(Request.Files.Count>=1)
+            if (Request.Files.Count >= 1)
             {
                 var file = Request.Files[0];
                 var imgBytes = new byte[file.ContentLength - 1];
-                file.InputStream.Read(imgBytes, 0, file.ContentLength-1);
+                file.InputStream.Read(imgBytes, 0, file.ContentLength - 1);
                 var base64String = Convert.ToBase64String(imgBytes, 0, imgBytes.Length);
-                obj.ImageUrl = base64String;
+                ob.ImageUrl = base64String;
             }
 
-           bool result= ob.EditEmployee(obj);
-            
-            
-          return RedirectToAction("Index", "Home");
+            bool result = obj.EditEmployee(ob);
+
+
+            return RedirectToAction("Index", "Home");
 
         }
 
@@ -136,8 +141,137 @@ namespace LeaveManagementSysytem.Controllers
             var userStore = new ApplicationUserStore(appDbContext);
             var userManager = new ApplicationUserManager(userStore);
             Employee appUser = userManager.FindById(User.Identity.GetUserId());
-                //FindById(User.Identity.GetUserId());
+            //FindById(User.Identity.GetUserId());
             return View(appUser);
         }
+
+
+
+
+
+        public ActionResult LeaveApply()
+        {
+            Employee emp = new Employee();
+            emp.Id = User.Identity.GetUserId();
+            Employee em = new Employee();
+            em = obj.GetEmployeeById(emp.Id);
+            Leave ob = new Leave();
+            ob.Eid = em.Eid;
+            // StartDate
+            //EndDate
+            //Number 
+            ob.EmployeeName = em.EmployeeName;
+            ob.DepartmentName = em.DepartmentName;
+            ob.Status = false;
+            ob.Projectid = em.Projectid;
+
+            return View(ob);
+        }
+
+        [HttpPost]
+        public ActionResult LeaveApply(Leave ob)
+        {
+
+            obj.CreateLeave(ob);
+            return RedirectToAction("Index", "Home");
+
+        }
+
+
+        [ExceptEmployeeAuthorization]
+        public ActionResult LeaveView()
+        {
+            List<Leave> LeaveList = obj.GetAllLeaves();
+            //Leave ob = new Leave();
+            //ob.Eid = obj.Eid;
+            //// StartDate
+            ////EndDate
+            ////Number 
+            //ob.DepartmentName = obj.DepartmentName;
+            //ob.Status = false;
+            //ob.Projectid = obj.Projectid;
+
+            return View(LeaveList);
+        }
+
+
+        [ManagerAndSpecialAuthorization]
+        public ActionResult LeaveAction(int Id)
+        {
+            Leave ob = obj.GetLeaveById(Id);
+            //Leave ob = new Leave();
+            //ob.Eid = obj.Eid;
+            //// StartDate
+            ////EndDate
+            ////Number 
+            //ob.DepartmentName = obj.DepartmentName;
+            //ob.Status = false;
+            //ob.Projectid = obj.Projectid;
+            return View(ob);
+        }
+        [ManagerAndSpecialAuthorization]
+        [HttpPost]
+        public ActionResult LeaveAction(Leave lv)
+        {
+            obj.UpdateLeave(lv);
+            //Leave ob = new Leave();
+            //ob.Eid = obj.Eid;
+            //// StartDate
+            ////EndDate
+            ////Number 
+            //ob.DepartmentName = obj.DepartmentName;
+            //ob.Status = false;
+            //ob.Projectid = obj.Projectid;
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        public ActionResult Search()
+        {
+            List<Employee> EmployeeList = obj.GetAllEmployees();
+            return View(EmployeeList);
+        }
+        [HttpPost]
+        public ActionResult Search(string EmployeeName)
+        {
+            Employee ob = obj.FindEmployee(EmployeeName);
+            return View(ob);
+        }
+
+
+        public JsonResult SendMailToUser()
+        {
+            bool result = false;
+
+            result = SendEmail("praveeninpal@gmail.com", "Email sending test", "    <p> hai Praveen <br/>This email is for testing purpose <br/>regards </p>");
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public bool SendEmail(string ToEmail, string subject, string emailBody)
+        {
+            try
+            {
+                string senderEmail = System.Configuration.ConfigurationManager.AppSettings["SenderEmail"].ToString();
+                string senderPassword= System.Configuration.ConfigurationManager.AppSettings["SenderPassword"].ToString();
+
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                client.EnableSsl = true;
+                client.Timeout = 100000;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential(senderEmail, senderPassword);
+                MailMessage mailMessage = new MailMessage(senderEmail, ToEmail, subject, emailBody);
+                mailMessage.IsBodyHtml = true;
+                mailMessage.BodyEncoding = UTF8Encoding.UTF8;
+                client.Send(mailMessage);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
+
     }
+
 }

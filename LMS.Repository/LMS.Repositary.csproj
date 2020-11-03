@@ -64,9 +64,14 @@
     <Compile Include="ApplicationUsersStore.cs" />
     <Compile Include="EmployeeDbContext.cs" />
     <Compile Include="EmployeeRepository.cs" />
+    <Compile Include="LeaveRepository.cs" />
     <Compile Include="Migrations\202011011437316_initial.cs" />
     <Compile Include="Migrations\202011011437316_initial.designer.cs">
       <DependentUpon>202011011437316_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011030329269_LeavesTable.cs" />
+    <Compile Include="Migrations\202011030329269_LeavesTable.designer.cs">
+      <DependentUpon>202011030329269_LeavesTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,6 +89,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202011011437316_initial.resx">
       <DependentUpon>202011011437316_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011030329269_LeavesTable.resx">
+      <DependentUpon>202011030329269_LeavesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -16,7 +16,7 @@ namespace Repositary
         {
 
         }
+        public DbSet<Leave> Leaves { get; set; }
 
-      
     }
 }
