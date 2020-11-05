@@ -72,5 +72,17 @@ namespace Business
         {
             return ob.GetById(id);
         }
+
+        public Employee DeleteEmployee(Employee rvm)
+        {
+            return ob.Delete(rvm);
+        }
+
+        public List<Employee> SearchRole(string role)
+        {
+            return ob.SearchBy(role);
+        }
+
+      
     }
 }

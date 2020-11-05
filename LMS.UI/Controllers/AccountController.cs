@@ -28,7 +28,7 @@ namespace LeaveManagementSysytem.Controllers
         }
         // GET: Account
         [HRAuthorization]
-        public ActionResult Index()
+        public ActionResult Employees()
         {
             List<Employee> EmployeeList = obj.GetAllEmployees();
             return View(EmployeeList);
@@ -52,13 +52,25 @@ namespace LeaveManagementSysytem.Controllers
                 return View();
         }
 
+        public ActionResult Delete(string Id)
+        {
+            Employee rvm = new Employee();
+            rvm.Id = Id;
+            Employee Emp = obj.DeleteEmployee(rvm);
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpPost]
+        public ActionResult SearchByRole(string SearchByRole)
+        {
+            
+           List<Employee> Emp = obj.SearchRole(SearchByRole);
+            return View(Emp);
+        }
         public ActionResult Edit(string Id)
         {
             Employee rvm = new Employee();
             rvm.Id = Id;
             Employee Emp = obj.ViewEmployees(rvm);
-
-
             return View(Emp);
         }
         [HttpPost]
@@ -69,7 +81,7 @@ namespace LeaveManagementSysytem.Controllers
             if (Request.Files.Count >= 1)
             {
                 var file = Request.Files[0];
-                var imgBytes = new byte[file.ContentLength - 1];
+                var imgBytes = new byte[file.ContentLength];
                 file.InputStream.Read(imgBytes, 0, file.ContentLength - 1);
                 var base64String = Convert.ToBase64String(imgBytes, 0, imgBytes.Length);
                 ob.ImageUrl = base64String;
@@ -91,7 +103,7 @@ namespace LeaveManagementSysytem.Controllers
         [HttpPost]
         public ActionResult Login(Login lg)
         {
-
+           
 
             //var ps = Crypto.HashPassword(lg.Password); 
             //login
@@ -101,6 +113,8 @@ namespace LeaveManagementSysytem.Controllers
             var user = userManager.Users.Where(temp => (temp.Email == lg.Username && temp.Password == lg.Password)).FirstOrDefault();
             if (user != null)
             {
+                Session["CurrentUserName"] = user.EmployeeName;
+
                 //login
                 var authenticationManager = HttpContext.GetOwinContext().Authentication;
                 var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
@@ -118,6 +132,16 @@ namespace LeaveManagementSysytem.Controllers
                 {
                     return RedirectToAction("Index", "Home");
                 }
+                Session["Role"] = user.Roles;
+                Session["Employee"] = user;
+                if ((user.EmployeeDesignation == "HR") && (user.SpecialPermission == true) )
+                {
+                    Session["Special"] = "true";
+
+                }
+
+
+
             }
             else
             {
@@ -162,7 +186,7 @@ namespace LeaveManagementSysytem.Controllers
             //Number 
             ob.EmployeeName = em.EmployeeName;
             ob.DepartmentName = em.DepartmentName;
-            ob.Status = false;
+            ob.Status = "Pending";
             ob.Projectid = em.Projectid;
 
             return View(ob);
@@ -190,7 +214,7 @@ namespace LeaveManagementSysytem.Controllers
             //ob.DepartmentName = obj.DepartmentName;
             //ob.Status = false;
             //ob.Projectid = obj.Projectid;
-
+           
             return View(LeaveList);
         }
 
@@ -235,7 +259,7 @@ namespace LeaveManagementSysytem.Controllers
         public ActionResult Search(string EmployeeName)
         {
             Employee ob = obj.FindEmployee(EmployeeName);
-            return View(ob);
+            return View("Search1",ob);
         }
 
 

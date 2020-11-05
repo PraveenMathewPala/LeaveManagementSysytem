@@ -6,12 +6,37 @@
 }
 
 <h2>Search</h2>
+
+<form action="/Account/SearchByRole" method="post" enctype="multipart/form-data">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+
+            <label for="Search">Search by roles</label>
+            <select class="form-control" name="SearchByRole">
+                <option value="">Select Role</option>
+                <option value="ProjectManager">Project Manager</option>
+                <option value="HR">HR</option>
+                <option value="Employee">Employee</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group col-md-12">
+
+        <button type="submit" class="btn btn-success">Search</button>
+    </div>
+
+</form>
+
+<br/>
+
 <form action="/Account/Search" method="post" enctype="multipart/form-data">
 
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="EmployeeName">EmployeeName</label>
-            <select id="EmployeeName" name="EmployeeName" required>
+            <select class="form-control" name="EmployeeName" required>
+                <option value="">Select Name</option>
+
                 @foreach (var emp in Model)
                 {
                     <option value="@emp.EmployeeName">@emp.EmployeeName</option>

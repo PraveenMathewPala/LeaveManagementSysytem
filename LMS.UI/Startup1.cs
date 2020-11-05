@@ -40,7 +40,12 @@ namespace LeaveManagementSysytem
             //Create Admin User
             if (userManager.FindByName("admin") == null)
             {
+                
                 var user = new Employee();
+                user.EmployeeName = "AdminFirst";
+                user.Mobile = "9876543210";
+                user.EmployeeDesignation = "Admin";
+                user.DepartmentName = "Admin";
                 user.UserName = "admin";
                 user.Email = "admin@gmail.com";
                 string Password = "admin123";
@@ -52,35 +57,39 @@ namespace LeaveManagementSysytem
                 }
             }
 
-            //Create Manager Role
-            if (!roleManager.RoleExists("Manager"))
-            {
-                var role = new IdentityRole();
-                role.Name = "Manager";
-                roleManager.Create(role);
-            }
+            ////Create Manager Role
+            //if (!roleManager.RoleExists("Manager"))
+            //{
+            //    var role = new IdentityRole();
+            //    role.Name = "Manager";
+            //    roleManager.Create(role);
+            //}
 
-            //Create Manager User
-            if (userManager.FindByName("manager") == null)
-            {
-                var user = new Employee();
-                user.UserName = "manager";
-                user.Email = "manager@gmail.com";
-                user.Password = "manager123";
-                var chkUser = userManager.Create(user);
-                if (chkUser.Succeeded)
-                {
-                    userManager.AddToRole(user.Id, "Manager");
-                }
-            }
+            ////Create Manager User
+            //if (userManager.FindByName("manager") == null)
+            //{
+            //    var user = new Employee();
+            //    user.EmployeeName = "ManagerFirst";
+            //    user.Mobile = "9876543210";
+            //    user.EmployeeDesignation = "Manager";
+            //    user.DepartmentName = "Admin";
+            //    user.UserName = "manager";
+            //    user.Email = "manager@gmail.com";
+            //    user.Password = "manager123";
+            //    var chkUser = userManager.Create(user);
+            //    if (chkUser.Succeeded)
+            //    {
+            //        userManager.AddToRole(user.Id, "Manager");
+            //    }
+            //}
 
-            //Create Customer Role
-            if (!roleManager.RoleExists("Customer"))
-            {
-                var role = new IdentityRole();
-                role.Name = "Customer";
-                roleManager.Create(role);
-            }
+            ////Create Customer Role
+            //if (!roleManager.RoleExists("Customer"))
+            //{
+            //    var role = new IdentityRole();
+            //    role.Name = "Customer";
+            //    roleManager.Create(role);
+            //}
 
         }
 

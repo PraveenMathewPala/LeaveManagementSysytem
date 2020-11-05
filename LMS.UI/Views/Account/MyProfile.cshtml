@@ -1,41 +1,40 @@
-﻿<label>Test</label>
-@Model List<LMS.Model.Employee>
-<label>Test</label>
-    @{
+﻿@model LMS.Model.Employee
+
+@{
     ViewBag.Title = "MyProfile";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+}
 
-    <h2>MyProfile</h2>
+<h2>MyProfile</h2>
 
 
-    <body>
-        <h1>Employees</h1>
-        <table border="1">
-            <tr>
-                <th>Profile picture</th>
-                <th>Employee Name</th>
-                <th>Mobile</th>
+<body>
+    <h1>Employees</h1>
+    <table border="1">
+        <tr>
+            <th width="150">Profile picture</th>
+            <th width="150">Name</th>
+            <th width="150">Mobile</th>
 
-                <th>Department Name</th>
-                <th>Employee Designation</th>
-                <th>Special Permission</th>
+            <th width="150">Department Name</th>
+            <th width="250">Employee Designation</th>
+            <th width="250">Special Permission</th>
 
-                <th>Edit</th>
+            <th>Edit</th>
 
-            </tr>
-           
-            <tr>
-                <td><img src="data:image;base64,@Model.ImageUrl" width="50" /></td>
-                <td>@Model.EmployeeName</td>
-                <td>@Model.Mobile</td>
-                <td>@Model.DepartmentName</td>
+        </tr>
 
-                <td>@Model.EmployeeDesignation</td>
-                <td>@Model.SpecialPermission</td>
+        <tr>
+            <td><img src="data:image;base64,@Model.ImageUrl  " width="50" /></td>
+            <td>@Model.EmployeeName</td>
+            <td>@Model.Mobile</td>
+            <td>@Model.DepartmentName</td>
 
-                <td> <a href="/Account/Edit?Eid=@Model.Id" class="btn btn-outline-info text-decoration-none"><i class="fa fa-pencil" aria-hidden="true"></i>Edit Profile</a></td>
-            </tr>
+            <td>@Model.EmployeeDesignation</td>
+            <td>@Model.SpecialPermission</td>
 
-        </table>
-    </body>
+            <td> <a href="/Account/Edit?Id=@Model.Id" class="btn btn-outline-info text-decoration-none">Edit Profile</a></td>
+   </tr>
+
+    </table>
+</body>

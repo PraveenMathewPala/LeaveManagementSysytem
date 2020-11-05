@@ -208,15 +208,17 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Employees.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Shared\Image.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\MyProfile.cshtml" />
     <Content Include="Views\Account\LeaveApply.cshtml" />
     <Content Include="Views\Account\LeaveView.cshtml" />
     <Content Include="Views\Account\LeaveAction.cshtml" />
     <Content Include="Views\Account\Search.cshtml" />
+    <Content Include="Views\Account\Search1.cshtml" />
+    <Content Include="Views\Account\MyProfile.cshtml" />
+    <Content Include="Views\Account\SearchByRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

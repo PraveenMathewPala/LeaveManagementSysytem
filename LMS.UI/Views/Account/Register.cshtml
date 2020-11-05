@@ -66,17 +66,19 @@
                 <option value="Administration">Administration</option>
             </select>
         </div>
-        <div class="form-group col-md-6">
-            <label for=Special Permission">Special Permission</label>
-            <select id="SpecialPermission" name="SpecialPermission" required>
-                <option value="true">true</option>
-                <option value="false">false</option>
-            </select>
+        <input type="hidden" name="SpecialPermission" value=false />
+
+        <!--<div class="form-group col-md-6">-->
+            @* <label for=Special Permission">Special Permission</label>
+        <select id="SpecialPermission" name="SpecialPermission" required>
+            <option value="true">true</option>
+            <option value="false">false</option>
+        </select>*@
 
             @* <input type="number" class="form-control" id="Departmentid" name="Departmentid" placeholder="Departmentid">
-            *@ @Html.ValidationMessageFor(temp => temp.Departmentid)
+            *@ <!--@Html.ValidationMessageFor(temp => temp.Departmentid)
         </div>
-    </div>
+    </div>-->
     <div class="form-row">
 
 
@@ -85,6 +87,8 @@
             <select id="EmployeeDesignation" name="EmployeeDesignation" required>
                 <option value="ProjectManager">ProjectManager/VirtualManager</option>
                 <option value="Employee">Employee</option>
+                <option value="HR">HR</option>
+
 
             </select>
             @Html.ValidationMessageFor(temp => temp.EmployeeDesignation)

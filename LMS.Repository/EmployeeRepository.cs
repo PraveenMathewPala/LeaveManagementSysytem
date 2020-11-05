@@ -56,6 +56,20 @@ namespace Repositary
             return userManager.Users.Where(temp => temp.EmployeeName == empName).FirstOrDefault();
         }
 
+        public Employee Delete(Employee rvm)
+        {
+            Employee ev =userManager.Users.Where(temp => temp.Id == rvm.Id).FirstOrDefault();
+
+            userManager.Delete(GetById(rvm.Id));
+            //Where(temp => temp.Id == rvm.Id);
+            return ev;
+        }
+
+        public List<Employee> SearchBy(string Role)
+        {
+            return userManager.Users.Where(temp => temp.EmployeeDesignation==Role).ToList();
+        }
+
         public Employee GetById(string id)
         {
             return userManager.Users.Where(temp => temp.Id == id).FirstOrDefault();

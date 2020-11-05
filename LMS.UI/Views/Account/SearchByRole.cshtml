@@ -1,0 +1,38 @@
+﻿@model List<LMS.Model.Employee>
+
+@{
+    ViewBag.Title = "SearchByRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<html>
+
+<body>
+    <h1>Employees</h1>
+    <table border="1">
+        <tr>
+            <th>Profile picture</th>
+            <th>Employee Name</th>
+            <th>Mobile</th>
+
+            <th>Department Name</th>
+            <th>Employee Designation</th>
+           
+
+        </tr>
+        @foreach (var emp in Model)
+        {
+            <tr>
+                <td><img src="data:image;base64,@emp.ImageUrl" width="50" /></td>
+                <td>@emp.EmployeeName</td>
+                <td>@emp.Mobile</td>
+                <td>@emp.DepartmentName</td>
+                <td>@emp.EmployeeDesignation</td>
+
+              
+            </tr>
+        }
+    </table>
+</body>
+</html>

@@ -13,7 +13,7 @@
     <h1>Leaves</h1>
     <table border="1">
         <tr>
-            
+
             <th>Employee Name</th>
             <th>Department Name</th>
             <th>Projectid</th>
@@ -22,8 +22,10 @@
             <th>No Of days</th>
             <th>Status</th>
 
-
+            @if ((Session["Role"] == "Manager" )|| (Session["Special"]=="true"))
+            {
             <th>Edit</th>
+            }
 
         </tr>
         @foreach (var emp in Model)
@@ -37,8 +39,10 @@
         <td>@emp.Number</td>
         <td>@emp.Status</td>
 
-
-        <td> <a href="/Account/LeaveAction?Id=@emp.Lid" class="btn btn-outline-info text-decoration-none"><i class="fa fa-pencil" aria-hidden="true"></i>Action</a></td>
+        if ((Session["Role"] == "Manager") || (Session["Special"] == "true"))
+        {
+            <td> <a href="/Account/LeaveAction?Id=@emp.Lid" class="btn btn-outline-info text-decoration-none"><i class="fa fa-pencil" aria-hidden="true"></i>Action</a></td>
+        }
     </tr>
         }
     </table>

@@ -26,51 +26,73 @@
             <input type="number" class="form-control" id="Projectid" name="Projectid" placeholder="Projectid" value="@Model.Projectid">
             @Html.ValidationMessageFor(temp => temp.Projectid)
         </div>
-        <div class="form-group col-md-6">
-            <label for=Special Permission">Special Permission</label>
-            <select id="SpecialPermission" name="SpecialPermission">
-                <option value="true">true</option>
-                <option value="false">false</option>
-            </select>
-            @*<label for=Special Permission">Special Permission</label>
-            <input type="number" class="form-control" id="SpecialPermission" name="Special Permission" placeholder="1 or 0" value="@Model.SpecialPermission" [1,0] >*@
+        <div class="form-row">
+
+
+            <div class="form-group col-md-6">
+                <label for="DepartmentName">DepartmentName</label>
+                <select id="DepartmentName" name="DepartmentName">
+                    <option value="@Model.DepartmentName">@Model.DepartmentName</option>
+                    <option value="Developer">Developer</option>
+                    <option value="HR">HR</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="QA">QA</option>
+                    <option value="Testing">Testing</option>
+                    <option value="Administration">Administration</option>
+
+                </select>
+                @*<label for="Departmentid">Departmentid</label>
+                    <input type="number" class="form-control" id="Departmentid" name="Departmentid" placeholder="Departmentid" value="@Model.Departmentid">*@
+            </div>
         </div>
         <div class="form-group col-md-6">
-            <label for="DepartmentName">DepartmentName</label>
-            <select id="DepartmentName" name="DepartmentName">
-                <option value="@Model.DepartmentName">@Model.DepartmentName</option>
-                <option value="Developer">Developer</option>
+            <label for="EmployeeDesignation">EmployeeDesignation</label>
+            <select id="EmployeeDesignation" name="EmployeeDesignation" required>
+                <option value="@Model.EmployeeDesignation">@Model.EmployeeDesignation</option>
+                <option value="ProjectManager">ProjectManager</option>
+                <option value="Employee">Employee</option>
                 <option value="HR">HR</option>
-                <option value="Marketing">Marketing</option>
-                <option value="QA">QA</option>
-                <option value="Testing">Testing</option>
-                <option value="Administration">Administration</option>
-
             </select>
-            @*<label for="Departmentid">Departmentid</label>
-            <input type="number" class="form-control" id="Departmentid" name="Departmentid" placeholder="Departmentid" value="@Model.Departmentid">*@
         </div>
     </div>
-<div class="form-row">
-    
-   
-    <div class="form-group col-md-6">
-        <label for="EmployeeDesignation">EmployeeDesignation</label>
-        <input type="text" class="form-control" id="EmployeeDesignation" name="EmployeeDesignation" placeholder="EmployeeDesignation" value="@Model.EmployeeDesignation">
-    </div>
-    <div class="form-group col-md-6">
-        <label for="Image">Image</label>
-        
-        @{
-        Html.RenderPartial("Image");  
-        }
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="Image">Image</label>
+
+            @{
+                Html.RenderPartial("Image");
+            }
+
+        </div>
+
+        <div class="form-group col-md-6">
+           
+                <label for=Special Permission">Special Permission</label>
+                <select id="SpecialPermission" name="SpecialPermission">
+                    <option value="true">true</option>
+                    <option value="false">false</option>
+                </select>
+           
+            @*<label for=Special Permission">Special Permission</label>
+                <input type="number" class="form-control" id="SpecialPermission" name="Special Permission" placeholder="1 or 0" value="@Model.SpecialPermission" [1,0] >*@
+        </div>
+
+
+
+
 
     </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
 
-</div>
 
-<button type="submit" class="btn btn-success">Save</button>
-<a class="btn btn-danger" href="/Home/index">Cancel</a>
+
+            <button type="submit" class="btn btn-success">Save</button>
+            <a class="btn btn-danger" href="/Home/index">Cancel</a>
+        </div>
+    </div>
+
+
 </form>
 
 

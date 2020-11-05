@@ -31,7 +31,7 @@ namespace Repositary
 
         public List<Leave> GetLeaves()
         {
-            return db.Leaves.Select(temp => temp).ToList();
+            return db.Leaves.Where(temp => temp.Status!="Reject").ToList();
         }
 
         public Leave GetLeave(int Id)

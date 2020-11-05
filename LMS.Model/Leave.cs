@@ -25,7 +25,7 @@ namespace LMS.Model
 
         public string DepartmentName { get; set; }
 
-        public bool Status { get; set; }
+        public string Status { get; set; }
 
         public int Projectid { get; set; }
 

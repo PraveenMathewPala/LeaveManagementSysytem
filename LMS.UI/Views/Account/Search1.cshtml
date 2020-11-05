@@ -1,0 +1,30 @@
+﻿@model LMS.Model.Employee
+
+@{
+    ViewBag.Title = "Search1";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Search1</h2>
+
+<table border="2">
+    <tr>
+        <th width="150">Profile picture</th>
+        <th width="150">Name</th>
+        <th width="150">Mobile</th>
+
+        <th width="200">Department Name</th>
+        <th width="200">Employee Designation</th>
+    </tr>
+
+    <tr>
+        <td><img src="data:image;base64,@Model.ImageUrl  " width="50" /></td>
+        <td>@Model.EmployeeName</td>
+        <td>@Model.Mobile</td>
+        <td>@Model.DepartmentName</td>
+
+        <td>@Model.EmployeeDesignation</td>
+
+    </tr>
+
+</table>
