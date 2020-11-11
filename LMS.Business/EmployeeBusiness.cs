@@ -83,6 +83,9 @@ namespace Business
             return ob.SearchBy(role);
         }
 
-      
+        public List<Leave> GetAllLeavesById(int id)
+        {
+            return obj.SearchById(id);
+        }
     }
 }

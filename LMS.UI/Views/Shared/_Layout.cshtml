@@ -24,28 +24,34 @@
                         <li class="nav-item"><a class="nav-link" href="/Account/myprofile">@Session["CurrentUserName"]</a></li>
                     }
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Employees", "Employees", "Account")</li>
 
                     @if (User.Identity.IsAuthenticated == false)
                     {
                         <li class="nav-item"><a class="nav-link" href="/Account/Register">Register</a></li>
                         <li class="nav-item"><a class="nav-link" href="/Account/Login">Login</a></li>
                     }
+
                     @if (User.Identity.IsAuthenticated == true)
                     {
-                        <li class="nav-item"><a class="nav-link" href="/Account/myprofile">My Profile</a></li>
+                        //  <li class="nav-item"><a class="nav-link" href="/Account/myprofile">My Profile</a></li>
                         <li class="nav-item"><a class="nav-link" href="/Account/LeaveApply">LeaveApply</a></li>
+
                         <li class="nav-item"><a class="nav-link" href="/Account/Search">SearchEmployee</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/Account/Logout">Logout</a></li>
-                        if (Session["Role"] == "Manager")
+                        <li class="nav-item"><a class="nav-link" href="/Account/LeaveStatus">LeaveStatus</a></li>
+
+
+                        if (User.IsInRole("Manager") || User.IsInRole("Admin") || User.IsInRole("AdminSpecial"))
                         {
-                           <li class="nav-item"><a class="nav-link" href="/Account/LeaveView">LeaveView</a></li>
+                            <li>@Html.ActionLink("Employees", "Employees", "Account")</li>
+
+                            <li class="nav-item"><a class="nav-link" href="/Account/LeaveView">LeaveView</a></li>
                         }
 
+                        <li class="nav-item"><a class="nav-link" href="/Account/Logout">Logout</a></li>
 
                     }
 
-                    </ul>
+                </ul>
             </div>
         </div>
     </div>

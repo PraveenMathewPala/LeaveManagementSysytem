@@ -1,0 +1,36 @@
+﻿@model List<LMS.Model.Leave>
+
+@{
+    ViewBag.Title = "LeaveStatus";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>LeaveStatus</h2>
+
+<html>
+
+<body>
+    <table border="1">
+        <tr>
+
+            
+            <th width="200">StartDate</thwidth="200">
+            <th width="200">EndDate</th>
+            <th width="200">No Of days</th>
+            <th width="200">Status</th>
+
+        </tr>
+        @foreach (var emp in Model)
+        {
+            <tr>
+               
+                <td>@emp.StartDate</td>
+                <td>@emp.EndDate</td>
+                <td>@emp.Number</td>
+                <td>@emp.Status</td>
+
+            </tr>
+        }
+    </table>
+</body>
+</html>

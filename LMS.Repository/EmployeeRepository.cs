@@ -38,6 +38,24 @@ namespace Repositary
             test.EmployeeDesignation = obj.EmployeeDesignation;
             test.ImageUrl = obj.ImageUrl;
             var result = userManager.Update(test);
+            if (result.Succeeded)
+            {
+                
+
+                userManager.RemoveFromRole(test.Id, userManager.GetRoles(test.Id).FirstOrDefault());
+                //userManager.RemoveFromRole(userManager.GetR);
+
+                if (obj.DepartmentName == LMSConstants.role_hr)
+                    userManager.AddToRole(test.Id, "Admin");
+                if (obj.DepartmentName == "HR" && (obj.SpecialPermission == true || obj.EmployeeDesignation == "ProjectManager"))
+                    userManager.AddToRole(test.Id, "AdminSpecial");
+                else if (obj.EmployeeDesignation == "ProjectManager")
+                    userManager.AddToRole(test.Id, "Manager");
+                else
+                    userManager.AddToRole(test.Id, "Customer");
+
+
+            }
             return result.Succeeded;
 
 
@@ -65,6 +83,7 @@ namespace Repositary
             return ev;
         }
 
+       
         public List<Employee> SearchBy(string Role)
         {
             return userManager.Users.Where(temp => temp.EmployeeDesignation==Role).ToList();
@@ -89,9 +108,9 @@ namespace Repositary
             if(result.Succeeded)
             {
 
-                if (obj.DepartmentName == "HR")
+                if (obj.DepartmentName == LMSConstants.role_hr)
                     userManager.AddToRole(obj.Id, "Admin");
-                else if (obj.DepartmentName == "HR" && (obj.SpecialPermission == true || obj.DepartmentName == "ProjectManager"))
+                if (obj.DepartmentName == "HR" && (obj.SpecialPermission == true || obj.EmployeeDesignation == "ProjectManager"))
                     userManager.AddToRole(obj.Id, "AdminSpecial");
                else if (obj.EmployeeDesignation == "ProjectManager")
                     userManager.AddToRole(obj.Id, "Manager");

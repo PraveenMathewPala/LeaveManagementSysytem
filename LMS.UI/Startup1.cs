@@ -57,13 +57,13 @@ namespace LeaveManagementSysytem
                 }
             }
 
-            ////Create Manager Role
-            //if (!roleManager.RoleExists("Manager"))
-            //{
-            //    var role = new IdentityRole();
-            //    role.Name = "Manager";
-            //    roleManager.Create(role);
-            //}
+            //Create Manager Role
+            if (!roleManager.RoleExists("Manager"))
+            {
+                var role = new IdentityRole();
+                role.Name = "Manager";
+                roleManager.Create(role);
+            }
 
             ////Create Manager User
             //if (userManager.FindByName("manager") == null)
@@ -83,13 +83,19 @@ namespace LeaveManagementSysytem
             //    }
             //}
 
-            ////Create Customer Role
-            //if (!roleManager.RoleExists("Customer"))
-            //{
-            //    var role = new IdentityRole();
-            //    role.Name = "Customer";
-            //    roleManager.Create(role);
-            //}
+            //Create Customer Role
+            if (!roleManager.RoleExists("Customer"))
+            {
+                var role = new IdentityRole();
+                role.Name = "Customer";
+                roleManager.Create(role);
+            }
+            if (!roleManager.RoleExists("AdminSpecial"))
+            {
+                var role = new IdentityRole();
+                role.Name = "AdminSpecial";
+                roleManager.Create(role);
+            }
 
         }
 

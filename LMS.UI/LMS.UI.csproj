@@ -164,6 +164,7 @@
     <Compile Include="Filter\ManagerAndSpecialAuthorization.cs" />
     <Compile Include="Filter\ManagerAuthorization.cs" />
     <Compile Include="Filter\MyAuthenticationFilter.cs" />
+    <Compile Include="Filter\MyExceptionFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -219,6 +220,8 @@
     <Content Include="Views\Account\Search1.cshtml" />
     <Content Include="Views\Account\MyProfile.cshtml" />
     <Content Include="Views\Account\SearchByRole.cshtml" />
+    <Content Include="Views\Account\LeaveStatus.cshtml" />
+    <Content Include="Views\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

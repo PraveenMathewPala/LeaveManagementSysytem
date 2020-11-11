@@ -18,6 +18,7 @@ using System.Web.Mvc;
 
 namespace LeaveManagementSysytem.Controllers
 {
+    [MyExceptionFilter]
     public class AccountController : Controller
     {
         EmployeeBusiness obj;
@@ -27,7 +28,7 @@ namespace LeaveManagementSysytem.Controllers
 
         }
         // GET: Account
-        [HRAuthorization]
+        [ExceptEmployeeAuthorization]
         public ActionResult Employees()
         {
             List<Employee> EmployeeList = obj.GetAllEmployees();
@@ -57,7 +58,7 @@ namespace LeaveManagementSysytem.Controllers
             Employee rvm = new Employee();
             rvm.Id = Id;
             Employee Emp = obj.DeleteEmployee(rvm);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Account", "Employees");
         }
         [HttpPost]
         public ActionResult SearchByRole(string SearchByRole)
@@ -90,7 +91,7 @@ namespace LeaveManagementSysytem.Controllers
             bool result = obj.EditEmployee(ob);
 
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Account", "Employees");
 
         }
 
@@ -120,27 +121,29 @@ namespace LeaveManagementSysytem.Controllers
                 var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
                 authenticationManager.SignIn(new AuthenticationProperties(), userIdentity);
 
-                if (userManager.IsInRole(user.Id, "Admin"))
-                {
-                    return RedirectToAction("Index", "Home", new { area = "Admin" });
-                }
-                else if (userManager.IsInRole(user.Id, "Manager"))
-                {
-                    return RedirectToAction("Index", "Home", new { area = "Manager" });
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-                Session["Role"] = user.Roles;
-                Session["Employee"] = user;
-                if ((user.EmployeeDesignation == "HR") && (user.SpecialPermission == true) )
+                //if (userManager.IsInRole(user.Id, "Admin"))
+                //{
+                //    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                //}
+                //else if (userManager.IsInRole(user.Id, "Manager"))
+                //{
+                //    return RedirectToAction("Index", "Home", new { area = "Manager" });
+                //}
+                //else
+                //{
+                //    return RedirectToAction("Index", "Home");
+                //}
+
+                string s= userManager.GetRoles(user.Id).FirstOrDefault();
+                Session["Role"] = s;
+                    Session["Employee"] = user;
+                if ((user.EmployeeDesignation == "HR") && (user.SpecialPermission == true))
                 {
                     Session["Special"] = "true";
-
+                    
                 }
 
-
+                return RedirectToAction("Index", "Home");
 
             }
             else
@@ -172,7 +175,6 @@ namespace LeaveManagementSysytem.Controllers
 
 
 
-
         public ActionResult LeaveApply()
         {
             Employee emp = new Employee();
@@ -190,6 +192,28 @@ namespace LeaveManagementSysytem.Controllers
             ob.Projectid = em.Projectid;
 
             return View(ob);
+        }
+        public ActionResult LeaveStatus()
+        {
+            Employee emp = new Employee();
+            emp.Id = User.Identity.GetUserId();
+            Employee em = new Employee();
+            em = obj.GetEmployeeById(emp.Id);
+            //Employee em = new Employee();
+            //em = obj.GetEmployeeById(emp.Id);
+            //Leave ob = new Leave();
+            //ob.Eid = em.Eid;
+            //// StartDate
+            ////EndDate
+            ////Number 
+            //ob.EmployeeName = em.EmployeeName;
+            //ob.DepartmentName = em.DepartmentName;
+            //ob.Status = "Pending";
+            //ob.Projectid = em.Projectid;
+            List<Leave> LeaveList = obj.GetAllLeavesById(em.Eid);
+
+
+            return View(LeaveList);
         }
 
         [HttpPost]
