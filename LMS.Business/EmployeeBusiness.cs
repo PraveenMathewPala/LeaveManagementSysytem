@@ -87,5 +87,12 @@ namespace Business
         {
             return obj.SearchById(id);
         }
+
+        public Employee LoginUser(Login lg)
+        {
+            return ob.Login(lg);
+        }
+
+       
     }
 }

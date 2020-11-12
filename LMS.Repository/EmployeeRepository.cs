@@ -1,6 +1,7 @@
 ﻿
 using LMS.Model;
 using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Net.Http;
 
 namespace Repositary
 {
@@ -61,7 +63,37 @@ namespace Repositary
 
         }
 
-       
+        
+
+        public Employee Login(Login lg)
+        {
+            Employee user= userManager.Users.Where(temp => (temp.Email == lg.Username && temp.Password == lg.Password)).FirstOrDefault();
+
+            if (user != null)
+            {
+                
+
+                //login
+                var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
+                var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
+                authenticationManager.SignIn(new AuthenticationProperties(), userIdentity);
+
+                //if (userManager.IsInRole(user.Id, "Admin"))
+                //{
+                //    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                //}
+                //else if (userManager.IsInRole(user.Id, "Manager"))
+                //{
+                //    return RedirectToAction("Index", "Home", new { area = "Manager" });
+                //}
+                //else
+                //{
+                //    return RedirectToAction("Index", "Home");
+                //}
+            }
+                return user;
+          
+        }
 
         public List<Employee> GetEmployees()
         {
@@ -91,7 +123,9 @@ namespace Repositary
 
         public Employee GetById(string id)
         {
-            return userManager.Users.Where(temp => temp.Id == id).FirstOrDefault();
+           
+            Employee emp= userManager.Users.Where(temp => temp.Id == id).FirstOrDefault();
+            return emp;
         }
 
         public Employee ViewEmp(Employee rvm)
@@ -114,6 +148,8 @@ namespace Repositary
                     userManager.AddToRole(obj.Id, "AdminSpecial");
                else if (obj.EmployeeDesignation == "ProjectManager")
                     userManager.AddToRole(obj.Id, "Manager");
+                else
+                    userManager.AddToRole(obj.Id, "Customer");
 
             }
             return result.Succeeded ; 

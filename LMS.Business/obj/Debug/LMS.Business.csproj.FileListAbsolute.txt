@@ -6,6 +6,9 @@ C:\Users\User\source\repos\LMS1\LMS.Business\bin\Debug\Repositary.dll
 C:\Users\User\source\repos\LMS1\LMS.Business\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\User\source\repos\LMS1\LMS.Business\bin\Debug\Microsoft.AspNet.Identity.Core.dll
 C:\Users\User\source\repos\LMS1\LMS.Business\bin\Debug\EntityFramework.dll
+C:\Users\User\source\repos\LMS1\LMS.Business\bin\Debug\Microsoft.Owin.dll
+C:\Users\User\source\repos\LMS1\LMS.Business\bin\Debug\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\User\source\repos\LMS1\LMS.Business\bin\Debug\Owin.dll
 C:\Users\User\source\repos\LMS1\LMS.Business\bin\Debug\LMS.Model.pdb
 C:\Users\User\source\repos\LMS1\LMS.Business\bin\Debug\LMS.Model.dll.config
 C:\Users\User\source\repos\LMS1\LMS.Business\bin\Debug\Repositary.pdb
@@ -13,6 +16,8 @@ C:\Users\User\source\repos\LMS1\LMS.Business\bin\Debug\Repositary.dll.config
 C:\Users\User\source\repos\LMS1\LMS.Business\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\User\source\repos\LMS1\LMS.Business\bin\Debug\Microsoft.AspNet.Identity.Core.xml
 C:\Users\User\source\repos\LMS1\LMS.Business\bin\Debug\EntityFramework.xml
+C:\Users\User\source\repos\LMS1\LMS.Business\bin\Debug\Microsoft.Owin.xml
+C:\Users\User\source\repos\LMS1\LMS.Business\bin\Debug\Microsoft.Owin.Host.SystemWeb.xml
 C:\Users\User\source\repos\LMS1\LMS.Business\obj\Debug\LMS.Business.csprojAssemblyReference.cache
 C:\Users\User\source\repos\LMS1\LMS.Business\obj\Debug\LMS.Business.csproj.CoreCompileInputs.cache
 C:\Users\User\source\repos\LMS1\LMS.Business\obj\Debug\LMS.Business.csproj.CopyComplete
