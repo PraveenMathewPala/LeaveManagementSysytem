@@ -115,7 +115,7 @@ namespace LeaveManagementSysytem.Controllers
             }
             bool result = obj.EditEmployee(ob);
             if(result)
-                return RedirectToAction("MyProfile", "Account");
+                return RedirectToAction("Index", "Home");
             else
                 return RedirectToAction("Error");
 
@@ -127,7 +127,7 @@ namespace LeaveManagementSysytem.Controllers
             Employee rvm = new Employee();
             rvm.Id = Id;
             Employee Emp = obj.DeleteEmployee(rvm);
-            return RedirectToAction("Account", "Employees");
+            return RedirectToAction("Employees", "Account");
         }
 
 
@@ -153,11 +153,9 @@ namespace LeaveManagementSysytem.Controllers
         public ActionResult LeaveApply()
         {
             Leave ob = new Leave();
-            ob.Eid = user.Eid;            
-            ob.EmployeeName = user.EmployeeName;
-            ob.DepartmentName = user.DepartmentName;
-            ob.Status = "Pending";
-            ob.Projectid = user.Projectid;
+            string s = (string)Session["CurrentUser"];
+            ob = obj.GetByName(s);
+            
             return View(ob);
         }
 
@@ -171,7 +169,10 @@ namespace LeaveManagementSysytem.Controllers
 
         public ActionResult LeaveStatus()
         {
-            List<Leave> LeaveList = obj.GetAllLeavesById(user.Eid);
+            Leave ob = new Leave();
+            string s = (string)Session["CurrentUser"];
+            ob = obj.GetByName(s);
+            List<Leave> LeaveList = obj.GetAllLeavesById(ob.Eid);
             return View(LeaveList);
         }
 
@@ -196,6 +197,7 @@ namespace LeaveManagementSysytem.Controllers
         public ActionResult LeaveAction(Leave lv)
         {
             obj.UpdateLeave(lv);
+            SendMailToUser(lv);
             return RedirectToAction("Index", "Home");
         }
 
@@ -214,11 +216,13 @@ namespace LeaveManagementSysytem.Controllers
         }
 
 
-        public JsonResult SendMailToUser()
+        public JsonResult SendMailToUser(Leave lv)
         {
-            bool result = false;
+            Employee ob = obj.FindEmployee(lv.EmployeeName);
 
-            result = SendEmail("praveeninpal@gmail.com", "Email sending test", "    <p> hai Praveen <br/>This email is for testing purpose <br/>regards </p>");
+            bool result = false;
+            string s= "<p> hai " + ob.EmployeeName + " <br/>your leave from " + lv.StartDate + " to " + lv.EndDate +" is " + lv.Status +"  <br/>regards </p>";
+            result = SendEmail(ob.Email, "Leave Status", s);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 

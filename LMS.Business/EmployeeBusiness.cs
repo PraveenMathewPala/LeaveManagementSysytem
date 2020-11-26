@@ -93,6 +93,9 @@ namespace Business
             return ob.Login(lg);
         }
 
-       
+        public Leave GetByName(string v)
+        {
+            return ob.GetbyName(v);
+        }
     }
 }

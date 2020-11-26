@@ -63,7 +63,17 @@ namespace Repositary
 
         }
 
-        
+        public Leave GetbyName(string v)
+        {
+            Leave ob = new Leave();
+            Employee user= userManager.Users.Where(temp => temp.UserName == v).FirstOrDefault();
+            ob.Eid = user.Eid;
+            ob.EmployeeName = user.EmployeeName;
+            ob.DepartmentName = user.DepartmentName;
+            ob.Status = "Pending";
+            ob.Projectid = user.Projectid;
+            return ob;
+        }
 
         public Employee Login(Login lg)
         {
@@ -78,19 +88,7 @@ namespace Repositary
                 var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
                 authenticationManager.SignIn(new AuthenticationProperties(), userIdentity);
 
-                //if (userManager.IsInRole(user.Id, "Admin"))
-                //{
-                //    return RedirectToAction("Index", "Home", new { area = "Admin" });
-                //}
-                //else if (userManager.IsInRole(user.Id, "Manager"))
-                //{
-                //    return RedirectToAction("Index", "Home", new { area = "Manager" });
-                //}
-                //else
-                //{
-                //    return RedirectToAction("Index", "Home");
-                //}
-            }
+               }
                 return user;
           
         }
@@ -142,11 +140,12 @@ namespace Repositary
             if(result.Succeeded)
             {
 
-                if (obj.DepartmentName == LMSConstants.role_hr)
-                    userManager.AddToRole(obj.Id, "Admin");
+               
                 if (obj.DepartmentName == "HR" && (obj.SpecialPermission == true || obj.EmployeeDesignation == "ProjectManager"))
                     userManager.AddToRole(obj.Id, "AdminSpecial");
-               else if (obj.EmployeeDesignation == "ProjectManager")
+                else if (obj.DepartmentName == LMSConstants.role_hr)
+                    userManager.AddToRole(obj.Id, "Admin");
+                else if (obj.EmployeeDesignation == "ProjectManager")
                     userManager.AddToRole(obj.Id, "Manager");
                 else
                     userManager.AddToRole(obj.Id, "Customer");
